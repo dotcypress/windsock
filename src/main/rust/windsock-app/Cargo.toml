@@ -1,0 +1,19 @@
+[package]
+name = "windsock-app"
+version = "0.0.0"
+authors = ["Vitaly Domnikov <oss@vitaly.codes>"]
+edition = "2018"
+license = "MIT/Apache-2.0"
+
+[[bin]]
+name = "windsock-app"
+test = false
+bench = false
+
+[dependencies]
+panic-halt = "0.2.0"
+windsock-hal = { path = "../windsock-hal/"}
+
+[profile.release]
+codegen-units = 1
+lto = true

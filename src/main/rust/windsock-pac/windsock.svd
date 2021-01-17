@@ -1,0 +1,927 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance">
+  <name>Windsock</name>
+  <cpu>
+    <name>VexRiscV</name>
+    <revision>2.0.0</revision>
+    <endian>little</endian>
+    <mpuPresent>0</mpuPresent>
+    <fpuPresent>0</fpuPresent>
+    <nvicPrioBits>0</nvicPrioBits>
+    <vendorSystickConfig>0</vendorSystickConfig>
+  </cpu>
+  <addressUnitBits>8</addressUnitBits>
+  <width>32</width>
+  <size>32</size>
+  <access>read-write</access>
+  <resetValue>0x00000000</resetValue>
+  <resetMask>0xFFFFFFFF</resetMask>
+  <peripherals>
+    <peripheral>
+      <name>SYSTEM</name>
+      <groupName>SYSTEM</groupName>
+      <description>System information and status register</description>
+      <baseAddress>0xF0000000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x20</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>PANIC</name>
+          <description>Application panic flag</description>
+          <addressOffset>0x00</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+          <access>write-only</access>
+        </register>
+        <register>
+          <name>CLOCK</name>
+          <description>System clock frequency</description>
+          <addressOffset>0x04</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>PERIOD</name>
+          <description>System clock period in nanoseconds</description>
+          <addressOffset>0x08</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+          <access>read-only</access>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>GPIOA</name>
+      <groupName>GPIO</groupName>
+      <description>General Purpose I/O</description>
+      <baseAddress>0xF0010000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x0C</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>IDR</name>
+          <description>GPIO port input data register</description>
+          <addressOffset>0x00</addressOffset>
+          <resetValue>0x00</resetValue>
+          <access>read-only</access>
+          <size>32</size>
+          <fields>
+            <field>
+              <name>IDR31</name>
+              <description>Pin 31 input data</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR30</name>
+              <description>Pin 30 input data</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR29</name>
+              <description>Pin 29 input data</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR28</name>
+              <description>Pin 28 input data</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR27</name>
+              <description>Pin 27 input data</description>
+              <bitOffset>27</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR26</name>
+              <description>Pin 26 input data</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR25</name>
+              <description>Pin 25 input data</description>
+              <bitOffset>25</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR24</name>
+              <description>Pin 24 input data</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR23</name>
+              <description>Pin 23 input data</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR22</name>
+              <description>Pin 22 input data</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR21</name>
+              <description>Pin 21 input data</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR20</name>
+              <description>Pin 20 input data</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR19</name>
+              <description>Pin 19 input data</description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR18</name>
+              <description>Pin 18 input data</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR17</name>
+              <description>Pin 17 input data</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR16</name>
+              <description>Pin 16 input data</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR15</name>
+              <description>Pin 15 input data</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR14</name>
+              <description>Pin 14 input data</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR13</name>
+              <description>Pin 13 input data</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR12</name>
+              <description>Pin 12 input data</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR11</name>
+              <description>Pin 11 input data</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR10</name>
+              <description>Pin 10 input data</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR9</name>
+              <description>Pin 9 input data</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR8</name>
+              <description>Pin 8 input data</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR7</name>
+              <description>Pin 7 input data</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR6</name>
+              <description>Pin 6 input data</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR5</name>
+              <description>Pin 5 input data</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR4</name>
+              <description>Pin 4 input data</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR3</name>
+              <description>Pin 3 input data</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR2</name>
+              <description>Pin 2 input data</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR1</name>
+              <description>Pin 1 input data</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IDR0</name>
+              <description>Pin 0 input data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ODR</name>
+          <description>GPIO port output data register</description>
+          <addressOffset>0x04</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+          <fields>
+            <field>
+              <name>ODR31</name>
+              <description>Pin 31 output data</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR30</name>
+              <description>Pin 30 output data</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR29</name>
+              <description>Pin 29 output data</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR28</name>
+              <description>Pin 28 output data</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR27</name>
+              <description>Pin 27 output data</description>
+              <bitOffset>27</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR26</name>
+              <description>Pin 26 output data</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR25</name>
+              <description>Pin 25 output data</description>
+              <bitOffset>25</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR24</name>
+              <description>Pin 24 output data</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR23</name>
+              <description>Pin 23 output data</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR22</name>
+              <description>Pin 22 output data</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR21</name>
+              <description>Pin 21 output data</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR20</name>
+              <description>Pin 20 output data</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR19</name>
+              <description>Pin 19 output data</description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR18</name>
+              <description>Pin 18 output data</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR17</name>
+              <description>Pin 17 output data</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR16</name>
+              <description>Pin 16 output data</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR15</name>
+              <description>Pin 15 output data</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR14</name>
+              <description>Pin 14 output data</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR13</name>
+              <description>Pin 13 output data</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR12</name>
+              <description>Pin 12 output data</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR11</name>
+              <description>Pin 11 output data</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR10</name>
+              <description>Pin 10 output data</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR9</name>
+              <description>Pin 9 output data</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR8</name>
+              <description>Pin 8 output data</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR7</name>
+              <description>Pin 7 output data</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR6</name>
+              <description>Pin 6 output data</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR5</name>
+              <description>Pin 5 output data</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR4</name>
+              <description>Pin 4 output data</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR3</name>
+              <description>Pin 3 output data</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR2</name>
+              <description>Pin 2 output data</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR1</name>
+              <description>Pin 1 output data</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODR0</name>
+              <description>Pin 0 output data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MODER</name>
+          <description>GPIO port mode register</description>
+          <addressOffset>0x08</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+          <fields>
+            <field>
+              <name>MODER31</name>
+              <description>Pin 31 mode</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER30</name>
+              <description>Pin 30 mode</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER29</name>
+              <description>Pin 29 mode</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER28</name>
+              <description>Pin 28 mode</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER27</name>
+              <description>Pin 27 mode</description>
+              <bitOffset>27</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER26</name>
+              <description>Pin 26 mode</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER25</name>
+              <description>Pin 25 mode</description>
+              <bitOffset>25</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER24</name>
+              <description>Pin 24 mode</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER23</name>
+              <description>Pin 23 mode</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER22</name>
+              <description>Pin 22 mode</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER21</name>
+              <description>Pin 21 mode</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER20</name>
+              <description>Pin 20 mode</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER19</name>
+              <description>Pin 19 mode</description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER18</name>
+              <description>Pin 18 mode</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER17</name>
+              <description>Pin 17 mode</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER16</name>
+              <description>Pin 16 mode</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER15</name>
+              <description>Pin 15 mode</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER14</name>
+              <description>Pin 14 mode</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER13</name>
+              <description>Pin 13 mode</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER12</name>
+              <description>Pin 12 mode</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER11</name>
+              <description>Pin 11 mode</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER10</name>
+              <description>Pin 10 mode</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER9</name>
+              <description>Pin 9 mode</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER8</name>
+              <description>Pin 8 mode</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER7</name>
+              <description>Pin 7 mode</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER6</name>
+              <description>Pin 6 mode</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER5</name>
+              <description>Pin 5 mode</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER4</name>
+              <description>Pin 4 mode</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER3</name>
+              <description>Pin 3 mode</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER2</name>
+              <description>Pin 2 mode</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER1</name>
+              <description>Pin 1 mode</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MODER0</name>
+              <description>Pin 0 mode</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>UART1</name>
+      <groupName>UART</groupName>
+      <description>Universal synchronous asynchronous receiver/transmitter</description>
+      <baseAddress>0xF0020000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x80</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>DATA</name>
+          <description>UART data register</description>
+          <addressOffset>0x00</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+          <fields>
+            <field>
+              <name>TX</name>
+              <description>TX data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>RX</name>
+              <description>RX data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ISR</name>
+          <description>UART interrupt status register</description>
+          <addressOffset>0x04</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+          <fields>
+            <field>
+              <name>RX_FIFO</name>
+              <description>RX fifo occupancy</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>TX_FIFO</name>
+              <description>TX FIFO availability</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>TX_ACTIVE</name>
+              <description>TX active flag</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>RX_INT_PEND</name>
+              <description>RX interrupt pending flag</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>TX_INT_PEND</name>
+              <description>TX interrupt pending flag</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>RX_INT_EN</name>
+              <description>RX interrupt enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TX_INT_EN</name>
+              <description>TX interrupt enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DIV</name>
+          <description>UART clock divider register</description>
+          <addressOffset>0x08</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+        </register>
+        <register>
+          <name>CFG</name>
+          <description>UART frame configuration register</description>
+          <addressOffset>0x0c</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+          <fields>
+            <field>
+              <name>STOP</name>
+              <description>Stop bits</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PARITY</name>
+              <description>Parity</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>LENGTH</name>
+              <description>Word length</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RXSR</name>
+          <description>UART RX status register</description>
+          <addressOffset>0x10</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+          <fields>
+            <field>
+              <name>BREAK_CLEAR</name>
+              <description>Stop bits</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>BREAK_REQ</name>
+              <description>Stop bits</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>BREAK_DET</name>
+              <description>Stop bits</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>BREAK</name>
+              <description>Stop bits</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>OVERFLOW</name>
+              <description>RX overflow flag</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>ERROR</name>
+              <description>RX error flag</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>TIMER1</name>
+      <groupName>TIMER</groupName>
+      <description>Timer1</description>
+      <baseAddress>0xF0030000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x12</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>COUNTER</name>
+          <description>Timer counter register</description>
+          <addressOffset>0x00</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+        </register>
+        <register>
+          <name>PSC</name>
+          <description>Timer prescaler register</description>
+          <addressOffset>0x04</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+        </register>
+        <register>
+          <name>LIMIT</name>
+          <description>Timer limit register</description>
+          <addressOffset>0x08</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+        </register>
+        <register>
+          <name>CFG</name>
+          <description>Timer configuration register</description>
+          <addressOffset>0x0c</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+          <fields>
+            <field>
+              <name>RELOAD</name>
+              <description>Timer auto reload</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>EN</name>
+              <description>Timer enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SR</name>
+          <description>Status register</description>
+          <addressOffset>0x10</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+        </register>
+        <register>
+          <name>ISR</name>
+          <description>Timer interrupt status register</description>
+          <addressOffset>0x14</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+        </register>
+        <register>
+          <name>MASKR</name>
+          <description>Timer interrupt mask register</description>
+          <addressOffset>0x18</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+        </register>
+      </registers>
+    </peripheral>
+  </peripherals>
+</device>

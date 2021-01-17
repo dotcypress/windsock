@@ -1,0 +1,17 @@
+[package]
+name = "windsock-pac"
+version = "0.0.0"
+authors = ["Vitaly Domnikov <oss@vitaly.codes>"]
+license = "MIT/Apache-2.0"
+edition = "2018"
+
+[dependencies]
+bare-metal = "0.2.4"
+riscv = "0.6.0"
+riscv-rt = { version = "0.8", optional = true }
+
+[build-dependencies]
+svd2ral = { git = "https://github.com/Disasm/svd2ral" }
+
+[features]
+rt = ["riscv-rt"]

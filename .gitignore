@@ -1,0 +1,8 @@
+project/**
+!project/build.properties
+target/
+*.log
+.metals
+.bloop
+.vscode
+cpu0.yaml

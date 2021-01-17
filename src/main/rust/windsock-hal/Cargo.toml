@@ -1,0 +1,25 @@
+[package]
+name = "windsock-hal"
+version = "0.0.0"
+authors = ["Vitaly Domnikov <oss@vitaly.codes>"]
+license = "MIT/Apache-2.0"
+edition = "2018"
+
+[lib]
+test = false
+bench = false
+
+[dependencies]
+nb = "1.0.0"
+
+[dependencies.windsock-pac]
+path = "../windsock-pac"
+features = ["rt"]
+
+[dependencies.embedded-hal]
+features = ["unproven"]
+version = "0.2.4"
+
+[dependencies.void]
+default-features = false
+version = "1.0.2"
