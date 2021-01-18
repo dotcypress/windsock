@@ -3,7 +3,7 @@ package windsock.examples
 import spinal.core._
 import spinal.lib._
 import spinal.lib.com.uart._
-import windsock.lib.comps._
+import windsock.lib.{RgbLed, Color}
 import windsock.lib.pmods._
 import windsock.bsp._
 

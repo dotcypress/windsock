@@ -16,6 +16,7 @@ case class SoC() extends Component {
   val coreConfig = CoreConfig.withRamFile("src/main/resources/ram.hex")
   val io = new Bundle {
     val pmod7 = pmod(SnapOff())
+    val pmod3 = pmod(TCS3200())
     val uart = master(Uart())
   }
 
@@ -25,6 +26,10 @@ case class SoC() extends Component {
   val snapOff = new SnapOffCtrl
   snapOff.io.pins <> io.pmod7
   core.io.asyncReset <> ~snapOff.io.button3
+
+  val colorSensor = new TCS3200Ctrl
+  colorSensor.io.pins <> io.pmod3
+  colorSensor.io.colors <> core.io.colors
 
   new SlowArea(1 Hz) {
     snapOff.io.led1 := CounterFreeRun(2).willOverflow

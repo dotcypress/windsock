@@ -1,4 +1,4 @@
-package windsock.lib.comps
+package windsock.lib
 
 import spinal.core._
 import spinal.lib._

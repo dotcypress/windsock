@@ -16,13 +16,15 @@ import spinal.lib.io.TriStateArray
 import spinal.lib.misc.HexTools
 import spinal.lib.system.debugger._
 
-import windsock.core.mmio.{Apb3SystemCtrl, Apb3TimerCtrl}
+import windsock.core.mmio.{Apb3SystemCtrl, Apb3TimerCtrl, Apb3RGBCtrl}
+import windsock.lib.Color
 
 class Core(config: CoreConfig) extends Component {
   val io = new Bundle {
     val asyncReset = in(Bool())
     val gpio = master(TriStateArray(config.gpioWidth bits))
     val uart = master(Uart())
+    val colors = slave(Flow(Color(8 bit)))
     val jtag = if (config.enableDebug) slave(Jtag()) else null
     val panic = out(Bool())
   }
@@ -54,6 +56,8 @@ class Core(config: CoreConfig) extends Component {
     reset = resetCtrl.axiReset,
     frequency = clockDomain.frequency
   )
+
+  axiClockDomain.setSyncWith(clockDomain)
 
   val axi = new ClockingArea(axiClockDomain) {
     val externalInterrupt = False
@@ -159,17 +163,21 @@ class Core(config: CoreConfig) extends Component {
     val timerCtrl = Apb3TimerCtrl()
     externalInterrupt setWhen (timerCtrl.io.interrupt)
 
+    val rgbCtrl = Apb3RGBCtrl()
+
     val apbDecoder = Apb3Decoder(
       master = apbBridge.io.apb,
       slaves = List(
         sysCtrl.io.apb -> (0x00000, 4 kB),
         gpioCtrl.io.apb -> (0x10000, 4 kB),
         uartCtrl.io.apb -> (0x20000, 4 kB),
-        timerCtrl.io.apb -> (0x30000, 4 kB)
+        timerCtrl.io.apb -> (0x30000, 4 kB),
+        rgbCtrl.io.apb -> (0x40000, 4 kB)
       )
     )
   }
 
   io.gpio <> axi.gpioCtrl.io.gpio
   io.uart <> axi.uartCtrl.io.uart
+  io.colors <> axi.rgbCtrl.io.colors
 }

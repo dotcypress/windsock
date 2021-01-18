@@ -5,6 +5,8 @@ use core::fmt::Write;
 
 use windsock_hal::gpioa::GPIOA;
 use windsock_hal::prelude::*;
+use windsock_hal::read_reg;
+use windsock_hal::rgb::RGB;
 use windsock_hal::rt::entry;
 use windsock_hal::serial;
 use windsock_hal::timer1::TIMER1;
@@ -24,7 +26,6 @@ fn main() -> ! {
   let mut led_3 = gpioa.pa3.into_output();
 
   let btn_1 = gpioa.pa31;
-  let btn_2 = gpioa.pa30;
 
   uart.rx().listen();
   unsafe {
@@ -37,6 +38,8 @@ fn main() -> ! {
   led_2.set_low().ok();
   led_3.set_high().ok();
 
+  let rgb = RGB::take().unwrap();
+
   loop {
     led_0.toggle().ok();
     led_1.toggle().ok();
@@ -47,11 +50,17 @@ fn main() -> ! {
       panic!("Hello panic");
     }
 
-    if btn_2.is_low().unwrap() {
-      timer.delay(100.ms());
-    } else {
-      timer.delay(500.ms());
-    }
+    write!(
+      uart,
+      "{} {} {} {}\r\n",
+      read_reg!(windsock_hal::rgb, rgb, SENSOR, RED),
+      read_reg!(windsock_hal::rgb, rgb, SENSOR, GREEN),
+      read_reg!(windsock_hal::rgb, rgb, SENSOR, BLUE),
+      read_reg!(windsock_hal::rgb, rgb, SENSOR, LUMA),
+    )
+    .ok();
+
+    timer.delay(50.ms());
   }
 }
 
