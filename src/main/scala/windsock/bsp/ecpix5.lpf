@@ -70,6 +70,18 @@ LOCATE COMP "io_led0_b" SITE "T22";
 IOBUF PORT "io_led0_b" SLEWRATE=FAST;
 IOBUF PORT "io_led0_b" IO_TYPE=LVCMOS33;
 
+LOCATE COMP "io_leds_leds_0_r" SITE "T23";
+IOBUF PORT "io_leds_leds_0_r" SLEWRATE=FAST;
+IOBUF PORT "io_leds_leds_0_r" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_leds_leds_0_g" SITE "R21";
+IOBUF PORT "io_leds_leds_0_g" SLEWRATE=FAST;
+IOBUF PORT "io_leds_leds_0_g" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_leds_leds_0_b" SITE "T22";
+IOBUF PORT "io_leds_leds_0_b" SLEWRATE=FAST;
+IOBUF PORT "io_leds_leds_0_b" IO_TYPE=LVCMOS33;
+
 // LED1
 
 LOCATE COMP "io_led1_r" SITE "U21";
@@ -83,6 +95,18 @@ IOBUF PORT "io_led1_g" IO_TYPE=LVCMOS33;
 LOCATE COMP "io_led1_b" SITE "T24";
 IOBUF PORT "io_led1_b" SLEWRATE=FAST;
 IOBUF PORT "io_led1_b" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_leds_leds_1_r" SITE "U21";
+IOBUF PORT "io_leds_leds_1_r" SLEWRATE=FAST;
+IOBUF PORT "io_leds_leds_1_r" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_leds_leds_1_g" SITE "W21";
+IOBUF PORT "io_leds_leds_1_g" SLEWRATE=FAST;
+IOBUF PORT "io_leds_leds_1_g" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_leds_leds_1_b" SITE "T24";
+IOBUF PORT "io_leds_leds_1_b" SLEWRATE=FAST;
+IOBUF PORT "io_leds_leds_1_b" IO_TYPE=LVCMOS33;
 
 // LED2
 
@@ -98,6 +122,18 @@ LOCATE COMP "io_led2_b" SITE "M21";
 IOBUF PORT "io_led2_b" SLEWRATE=FAST;
 IOBUF PORT "io_led2_b" IO_TYPE=LVCMOS33;
 
+LOCATE COMP "io_leds_leds_2_r" SITE "K21";
+IOBUF PORT "io_leds_leds_2_r" SLEWRATE=FAST;
+IOBUF PORT "io_leds_leds_2_r" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_leds_leds_2_g" SITE "K24";
+IOBUF PORT "io_leds_leds_2_g" SLEWRATE=FAST;
+IOBUF PORT "io_leds_leds_2_g" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_leds_leds_2_b" SITE "M21";
+IOBUF PORT "io_leds_leds_2_b" SLEWRATE=FAST;
+IOBUF PORT "io_leds_leds_2_b" IO_TYPE=LVCMOS33;
+
 // LED3
 
 LOCATE COMP "io_led3_r" SITE "P21";
@@ -111,6 +147,18 @@ IOBUF PORT "io_led3_g" IO_TYPE=LVCMOS33;
 LOCATE COMP "io_led3_b" SITE "P22";
 IOBUF PORT "io_led3_b" SLEWRATE=FAST;
 IOBUF PORT "io_led3_b" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_leds_leds_3_r" SITE "P21";
+IOBUF PORT "io_leds_leds_3_r" SLEWRATE=FAST;
+IOBUF PORT "io_leds_leds_3_r" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_leds_leds_3_g" SITE "R23";
+IOBUF PORT "io_leds_leds_3_g" SLEWRATE=FAST;
+IOBUF PORT "io_leds_leds_3_g" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_leds_leds_3_b" SITE "P22";
+IOBUF PORT "io_leds_leds_3_b" SLEWRATE=FAST;
+IOBUF PORT "io_leds_leds_3_b" IO_TYPE=LVCMOS33;
 
 // DDR
 

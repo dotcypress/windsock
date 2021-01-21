@@ -5,6 +5,7 @@ import spinal.lib._
 import spinal.lib.com.uart._
 import windsock.bsp._
 import windsock.core._
+import windsock.lib.ui._
 import windsock.lib.pmods._
 import spinal.lib.memory.sdram.xdr.SdramXdrIo
 
@@ -15,10 +16,13 @@ object SoC {
 case class SoC() extends Component {
   val coreConfig = CoreConfig.withRamFile("src/main/resources/ram.hex")
   val io = new Bundle {
+    val leds = out(LedArray())
     val pmod7 = pmod(SnapOff())
     val pmod3 = pmod(TCS3200())
     val uart = master(Uart())
   }
+
+  io.leds.switchOff()
 
   val core = new Core(coreConfig)
   core.io.uart <> io.uart

@@ -4,16 +4,20 @@ import spinal.core._
 import spinal.lib._
 import spinal.lib.bus.amba3.apb._
 import spinal.lib.bus.misc.BusSlaveFactory
-import windsock.lib.Color
+import spinal.lib.graphic._
+import windsock.lib._
 
 case class Apb3RGBCtrl() extends Component {
   val io = new Bundle {
     val apb = slave(Apb3(addressWidth = 8, dataWidth = 32))
-    val colors = slave(Flow(Color(8 bit)))
+    val colors = slave(Flow(Rgb(8, 8, 8)))
+    val luma = slave(Flow(UInt(8 bits)))
   }
 
   val busCtrl = Apb3SlaveFactory(io.apb)
 
-  val lastColor = io.colors.toReg
-  busCtrl.read(lastColor.asBits, 0x00)
+  val luma = io.luma.toReg
+  val color = io.colors.toReg
+  busCtrl.read(luma.asBits, 0x0)
+  busCtrl.read(color.asBits, 0x0, 0x8)
 }

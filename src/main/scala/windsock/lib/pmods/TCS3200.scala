@@ -3,6 +3,7 @@ package windsock.lib.pmods
 import spinal.core._
 import spinal.lib._
 import spinal.lib.fsm._
+import spinal.lib.graphic.Rgb
 import windsock.lib._
 
 case class TCS3200() extends PMODBundle {
@@ -22,7 +23,8 @@ case class TCS3200Ctrl(
 ) extends Component {
   val io = new Bundle {
     val pins = pmod(TCS3200())
-    val colors = master(Flow(Color(width)))
+    val colors = master(Flow(Rgb(width.value, width.value, width.value)))
+    val luma = master(Flow(UInt(width)))
   }
 
   val fsm = new StateMachine {
@@ -38,10 +40,10 @@ case class TCS3200Ctrl(
     val s2 = channel === Channel.luma || channel === Channel.green
     val s3 = channel === Channel.blue || channel === Channel.green
 
-    io.colors.payload.luma := luma
-    io.colors.payload.red := red
-    io.colors.payload.green := green
-    io.colors.payload.blue := blue
+    io.luma.payload := luma
+    io.colors.payload.r := red
+    io.colors.payload.g := green
+    io.colors.payload.b := blue
     io.colors.valid := False
 
     val vco = io.pins.pin4.as(Bool)

@@ -12,19 +12,20 @@ import spinal.lib.bus.amba4.axi._
 import spinal.lib.com.jtag.Jtag
 import spinal.lib.com.uart._
 import spinal.lib.graphic.vga.{Axi4VgaCtrl, Axi4VgaCtrlGenerics, Vga}
+import spinal.lib.graphic.Rgb
 import spinal.lib.io.TriStateArray
 import spinal.lib.misc.HexTools
 import spinal.lib.system.debugger._
 
 import windsock.core.mmio.{Apb3SystemCtrl, Apb3TimerCtrl, Apb3RGBCtrl}
-import windsock.lib.Color
+import windsock.lib._
 
 class Core(config: CoreConfig) extends Component {
   val io = new Bundle {
     val asyncReset = in(Bool())
     val gpio = master(TriStateArray(config.gpioWidth bits))
     val uart = master(Uart())
-    val colors = slave(Flow(Color(8 bit)))
+    val colors = slave(Flow(Rgb(8,8,8)))
     val jtag = if (config.enableDebug) slave(Jtag()) else null
     val panic = out(Bool())
   }

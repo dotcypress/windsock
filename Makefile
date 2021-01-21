@@ -1,8 +1,8 @@
-MODULE = SoC
+MODULE = LedAnimation
 BUILD_DIR = target/bitstream
 CONSTRAINTS = src/main/scala/windsock/bsp/ecpix5.lpf
 
-all: app elaborate bitstream
+all: elaborate bitstream
 
 elaborate: 
 	sbt --supershell=never "runMain windsock.examples.$(MODULE)"
