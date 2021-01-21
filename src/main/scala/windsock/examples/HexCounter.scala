@@ -13,7 +13,7 @@ object HexCounter {
 case class HexCounter() extends Component {
   val io = new Bundle {
     val leds = out(LedArray())
-    val pmod0 = pmod(SevenSegmentDisplay())
+    val pmod0 = master(SevenSegmentDisplay())
   }
 
   io.leds.switchOff()

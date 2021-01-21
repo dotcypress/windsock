@@ -13,8 +13,8 @@ object LedAnimation {
 
 case class LedAnimation() extends Component {
   val io = new Bundle {
-    val pmod7 = pmod(SnapOff())
-    val pmod0 = pmod(SevenSegmentDisplay())
+    val pmod7 = master(SnapOff())
+    val pmod0 = master(SevenSegmentDisplay())
     val leds = out(LedArray())
   }
 

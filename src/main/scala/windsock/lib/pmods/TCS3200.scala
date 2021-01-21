@@ -7,7 +7,7 @@ import spinal.lib.graphic.Rgb
 import windsock.lib._
 
 case class TCS3200() extends PMODBundle {
-  override def build() = {
+  override def asMaster() = {
     in(pin2, pin3, pin4)
     out(pin1, pin7, pin8, pin9, pin10)
   }
@@ -22,7 +22,7 @@ case class TCS3200Ctrl(
     measurePeriod: TimeNumber = 100 ms
 ) extends Component {
   val io = new Bundle {
-    val pins = pmod(TCS3200())
+    val pins = master(TCS3200())
     val colors = master(Flow(Rgb(width.value, width.value, width.value)))
     val luma = master(Flow(UInt(width)))
   }

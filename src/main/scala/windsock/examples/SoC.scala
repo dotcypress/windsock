@@ -17,8 +17,8 @@ case class SoC() extends Component {
   val coreConfig = CoreConfig.withRamFile("src/main/resources/ram.hex")
   val io = new Bundle {
     val leds = out(LedArray())
-    val pmod7 = pmod(SnapOff())
-    val pmod3 = pmod(TCS3200())
+    val pmod7 = master(SnapOff())
+    val pmod3 = master(TCS3200())
     val uart = master(Uart())
   }
 
