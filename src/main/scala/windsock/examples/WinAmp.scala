@@ -3,10 +3,8 @@ package windsock.examples
 import java.io.FileInputStream
 import spinal.core._
 import spinal.lib._
-import spinal.lib.graphic.Rgb
 import spinal.lib.misc._
 import windsock.bsp._
-import windsock.lib.ui._
 import windsock.lib.pmods._
 
 object WinAmp {
@@ -17,10 +15,7 @@ case class WinAmp() extends Component {
   val io = new Bundle {
     val pmod4 = master(AudioAmp())
     val pmod7 = master(SnapOff())
-    val leds = out(LedArray())
   }
-
-  io.leds.switchOff()
 
   val snapOff = new SnapOffCtrl
   snapOff.io.pins <> io.pmod7
