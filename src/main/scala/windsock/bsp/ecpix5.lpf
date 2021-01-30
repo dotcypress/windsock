@@ -3,17 +3,23 @@
 LOCATE COMP "clk" SITE "N22";
 IOBUF PORT "clk" IO_TYPE=LVCMOS33;
 
+LOCATE COMP "io_clock32MHz" SITE "N22";
+IOBUF PORT "io_clock32MHz" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_clock100MHz" SITE "K23";
+IOBUF PORT "io_clock100MHz" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_vcxo_control" SITE "H26";
+IOBUF PORT "io_vcxo_control" IO_TYPE=LVCMOS33;
+
+LOCATE COMP "io_vcxo_clockOut" SITE "L23";
+IOBUF PORT "io_vcxo_clockOut" IO_TYPE=LVCMOS33;
+
 LOCATE COMP "serdes_p_clk" SITE "AF12";
 IOBUF PORT "serdes_p_clk" IO_TYPE=LVCMOS33;
 
 LOCATE COMP "serdes_n_clk" SITE "AF13";
 IOBUF PORT "serdes_n_clk" IO_TYPE=LVCMOS33;
-
-LOCATE COMP "io_fastClock" SITE "K23";
-IOBUF PORT "io_fastClock" IO_TYPE=LVCMOS33;
-
-LOCATE COMP "vcxo_clk" SITE "H26";
-IOBUF PORT "vcxo_clk" IO_TYPE=LVCMOS33;
 
 // Reset
 
@@ -23,17 +29,17 @@ IOBUF PORT "resetn" IO_TYPE=LVCMOS33;
 LOCATE COMP "io_reset" SITE "N5";
 IOBUF PORT "resetn" IO_TYPE=LVCMOS33;
 
-LOCATE COMP "self_reset" SITE "M6";
-IOBUF PORT "self_reset" IO_TYPE=LVCMOS33;
+LOCATE COMP "io_self_reset" SITE "M6";
+IOBUF PORT "io_self_reset" IO_TYPE=LVCMOS33;
 
-LOCATE COMP "ftdi_reset" SITE "P23";
-IOBUF PORT "ftdi_reset" IO_TYPE=LVCMOS33;
+LOCATE COMP "io_ftdi_reset" SITE "P23";
+IOBUF PORT "io_ftdi_reset" IO_TYPE=LVCMOS33;
 
-LOCATE COMP "usb_phy_reset" SITE "E23";
-IOBUF PORT "usb_phy_reset" IO_TYPE=LVCMOS33;
+LOCATE COMP "io_usb_phy_reset" SITE "E23";
+IOBUF PORT "io_usb_phy_reset" IO_TYPE=LVCMOS33;
 
-LOCATE COMP "ethernet_phy_reset" SITE "C13";
-IOBUF PORT "ethernet_phy_reset" IO_TYPE=LVCMOS33;
+LOCATE COMP "io_ethernet_phy_reset" SITE "C13";
+IOBUF PORT "io_ethernet_phy_reset" IO_TYPE=LVCMOS33;
 
 // Debug
 

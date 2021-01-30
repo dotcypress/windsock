@@ -3,7 +3,7 @@ package windsock.examples
 import spinal.core._
 import spinal.lib._
 import windsock.lib.ui._
-import windsock.lib.pmods._
+import windsock.lib.pmod._
 import windsock.bsp._
 
 object HexCounter {

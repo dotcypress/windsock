@@ -3,10 +3,10 @@ package windsock.examples
 import spinal.core._
 import spinal.lib._
 import spinal.lib.com.uart._
-import windsock.bsp._
 import windsock.core._
+import windsock.lib.pmod._
 import windsock.lib.ui._
-import windsock.lib.pmods._
+import windsock.bsp._
 import spinal.lib.memory.sdram.xdr.SdramXdrIo
 
 object SoC {

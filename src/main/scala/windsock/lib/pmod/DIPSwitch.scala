@@ -1,4 +1,4 @@
-package windsock.lib.pmods
+package windsock.lib.pmod
 
 import spinal.core._
 import spinal.lib._

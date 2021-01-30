@@ -3,9 +3,9 @@ package windsock.examples
 import spinal.core._
 import spinal.lib._
 import spinal.lib.graphic.Rgb
-import windsock.bsp._
+import windsock.lib.pmod._
 import windsock.lib.ui._
-import windsock.lib.pmods._
+import windsock.bsp._
 
 object LedAnimation {
   def main(args: Array[String]) = ECPIX5.generate(new LedAnimation)

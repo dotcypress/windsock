@@ -4,8 +4,8 @@ import java.io.FileInputStream
 import spinal.core._
 import spinal.lib._
 import spinal.lib.misc._
+import windsock.lib.pmod._
 import windsock.bsp._
-import windsock.lib.pmods._
 
 object WinAmp {
   def main(args: Array[String]) = ECPIX5.generate(new WinAmp)
