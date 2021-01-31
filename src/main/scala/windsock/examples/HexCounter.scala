@@ -2,7 +2,7 @@ package windsock.examples
 
 import spinal.core._
 import spinal.lib._
-import windsock.lib.ui._
+import windsock.lib.LedArray
 import windsock.lib.pmod._
 import windsock.bsp._
 
@@ -16,7 +16,7 @@ case class HexCounter() extends Component {
     val pmod0 = master(SevenSegmentDisplay())
   }
 
-  io.leds.switchOff()
+  io.leds.powerOff()
 
   val core = new SlowArea(400 Hz) {
     val display = new SevenSegmentDisplayCtrl

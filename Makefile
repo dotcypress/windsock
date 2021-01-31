@@ -1,4 +1,4 @@
-MODULE = LedAnimation
+MODULE = WinAmp
 BUILD_DIR = target/bitstream
 CONSTRAINTS = src/main/scala/windsock/bsp/ecpix5.lpf
 

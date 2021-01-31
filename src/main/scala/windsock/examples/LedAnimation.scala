@@ -3,8 +3,8 @@ package windsock.examples
 import spinal.core._
 import spinal.lib._
 import spinal.lib.graphic.Rgb
+import windsock.lib.{LedArray, LedArrayCtrl}
 import windsock.lib.pmod._
-import windsock.lib.ui._
 import windsock.bsp._
 
 object LedAnimation {

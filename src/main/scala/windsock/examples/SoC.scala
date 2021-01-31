@@ -5,7 +5,7 @@ import spinal.lib._
 import spinal.lib.com.uart._
 import windsock.core._
 import windsock.lib.pmod._
-import windsock.lib.ui._
+import windsock.lib.LedArray
 import windsock.bsp._
 import spinal.lib.memory.sdram.xdr.SdramXdrIo
 
@@ -22,7 +22,7 @@ case class SoC() extends Component {
     val uart = master(Uart())
   }
 
-  io.leds.switchOff()
+  io.leds.powerOff()
 
   val core = new Core(coreConfig)
   core.io.uart <> io.uart

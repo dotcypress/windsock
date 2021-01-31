@@ -6,6 +6,7 @@ import spinal.lib._
 import spinal.lib.misc._
 import windsock.lib.pmod._
 import windsock.bsp._
+import _root_.windsock.lib.FirFilter
 
 object WinAmp {
   def main(args: Array[String]) = ECPIX5.generate(new WinAmp)
@@ -34,18 +35,19 @@ case class WinAmp() extends Component {
   )
   BinTools.initRam(ram, soundPath)
 
-  val track = new SlowArea(sampleRate) {
-    val frame = ram.readSync(
+  new SlowArea(sampleRate) {
+    val sample = ram.readSync(
       enable = True,
-      address = Counter(ram.wordCount, snapOff.io.button1)
+      address = CounterFreeRun(ram.wordCount)
     )
 
-    snapOff.io.led1 := frame(7) & frame(5)
-    snapOff.io.led2 := frame(7) & frame(4)
-    snapOff.io.led3 := frame(7) & frame(3)
-    snapOff.io.led4 := frame(7) & frame(2)
-    snapOff.io.led5 := frame(7) & frame(1)
+    amp.io.sample := U(sample)
 
-    amp.io.sample := U(frame)
+    snapOff.io.led1 := sample(7) & sample(5)
+    snapOff.io.led2 := sample(7) & sample(4)
+    snapOff.io.led3 := sample(7) & sample(3)
+    snapOff.io.led4 := sample(7) & sample(2)
+    snapOff.io.led5 := sample(7) & sample(1)
+
   }
 }

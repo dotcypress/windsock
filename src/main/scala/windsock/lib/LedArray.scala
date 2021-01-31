@@ -1,4 +1,4 @@
-package windsock.lib.ui
+package windsock.lib
 
 import spinal.core._
 import spinal.lib._
@@ -7,7 +7,7 @@ import spinal.lib.graphic._
 case class LedArray(size: Int = 4) extends Bundle {
   val leds = Vec.fill(size)(Rgb(RgbConfig(1, 1, 1)))
 
-  def switchOff() = {
+  def powerOff() = {
     this.allowOverride
     leds.foreach(led => {
       led.r := U(1)
