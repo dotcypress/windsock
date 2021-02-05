@@ -1,6 +1,6 @@
 // Clocks
 
-LOCATE COMP "clk" SITE "N22";
+LOCATE COMP "clk" SITE "K23";
 IOBUF PORT "clk" IO_TYPE=LVCMOS33;
 
 LOCATE COMP "io_clock32MHz" SITE "N22";

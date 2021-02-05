@@ -7,7 +7,7 @@ import spinal.lib._
 object ECPIX5 {
   def generate[T <: Component](
       gen: => T,
-      defaultClockDomainFrequency: HertzNumber = 26 MHz
+      defaultClockDomainFrequency: HertzNumber = 100 MHz
   ) {
     val targetDirectory = Paths.get("target/bitstream")
     if (!Files.exists(targetDirectory)) {

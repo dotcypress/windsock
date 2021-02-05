@@ -6,7 +6,6 @@ import spinal.lib._
 import spinal.lib.misc._
 import windsock.lib.pmod._
 import windsock.bsp._
-import _root_.windsock.lib.FirFilter
 
 object WinAmp {
   def main(args: Array[String]) = ECPIX5.generate(new WinAmp)
@@ -26,8 +25,8 @@ case class WinAmp() extends Component {
   amp.io.enable := snapOff.io.button1
   amp.io.gain := snapOff.io.button2
 
-  val soundPath = "src/main/resources/winamp.raw"
-  val sampleRate = 20800 Hz
+  val soundPath = "src/main/resources/winamp.32khz.pcm"
+  val sampleRate = 32 kHz
 
   val ram = Mem(
     Bits(8 bits),
