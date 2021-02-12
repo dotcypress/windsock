@@ -53,7 +53,6 @@ case class PLLConfig(
 case class PLL(cfg: PLLConfig) extends Component {
   val io = new Bundle {
     val clockIn = in(Bool)
-    val feedbackClockIn = in(Bool)
     val locked = out(Bool)
     val primaryClockOut = out(Bool)
     val secondaryClockOut = if (cfg.secondaryClockConfig != null) {
@@ -64,10 +63,11 @@ case class PLL(cfg: PLLConfig) extends Component {
   }
 
   val pll = EHXPLLL(cfg)
-  pll.feedbackClockIn <> pll.primaryClockOut
   pll.clockIn <> io.clockIn
   pll.locked <> io.locked
   pll.primaryClockOut <> io.primaryClockOut
+  pll.feedbackClockIn <> pll.primaryClockOut
+
   if (cfg.secondaryClockConfig != null) {
     pll.secondaryClockOut <> io.secondaryClockOut
   }
