@@ -17,15 +17,19 @@ case class UartPCM() extends Component {
     val pmod4 = master(AudioAmp())
   }
 
-  val amp = new AudioAmpCtrl()
+  val amp = new AudioAmpCtrl(8 bit)
   amp.io.pins <> io.pmod4
   amp.io.enable := True
   amp.io.gain := False
 
-  val playback = new SlowArea(32 kHz)
-  val pump = new UartPump(playback.clockDomain)
-  pump.io.uart <> io.uart
-
-  val sample = pump.io.data.toFlow.toReg()
+  val pcm = Stream(Bits(8 bits))
+  val sample = pcm.toFlow.toReg()
   amp.io.sample := U(sample)
+
+  val pump = new UartPump(
+    2 MHz,
+    clockDomain.newSlowedClockDomain(24 kHz)
+  )
+  pump.io.uart <> io.uart
+  pump.io.data <> pcm
 }

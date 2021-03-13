@@ -18,18 +18,19 @@ case class Serial() extends Component {
 
   io.leds.powerOff()
 
+  val counter = Counter(5 bit)
+  var charStream = Stream(Bits())
+  charStream.payload := B(U('a', 8 bits) + counter.resized)
+  charStream.valid := False
+
   val log = UartSink()
   log.io.uart <> io.uart
+  log.io.data <> charStream
 
-  val counter = Counter(4 bit)
-  val timeout = Timeout(200 ms)
-
-  when(log.io.sink.ready) {
+  val timeout = Timeout(16 Hz)
+  when(timeout) {
+    charStream.valid := True
     counter.increment()
     timeout.clear()
   }
-
-  val letter = U('a', 8 bits) + counter.resized
-  log.io.sink.valid := timeout
-  log.io.sink.payload := letter.asBits
 }

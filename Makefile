@@ -1,4 +1,4 @@
-MODULE = VGA
+MODULE = Serial
 BUILD_DIR = target/bitstream
 CONSTRAINTS = src/main/scala/windsock/bsp/ecpix5.lpf
 

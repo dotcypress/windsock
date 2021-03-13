@@ -15,15 +15,15 @@ case class AudioAmp(lowConnector: Boolean = true) extends PMODBundle {
   }
 }
 
-case class AudioAmpCtrl(lowConnector: Boolean = true) extends Component {
+case class AudioAmpCtrl(wordWidth: BitCount = 8 bit, lowConnector: Boolean = true) extends Component {
   val io = new Bundle {
     val pins = master(AudioAmp(lowConnector))
-    val sample = in(UInt(8 bits))
+    val sample = in(UInt(wordWidth))
     val enable = in(Bool())
     val gain = in(Bool())
   }
 
-  val pdm = PDM(8 bit)
+  val pdm = PDM(wordWidth)
   pdm.io.input <> io.sample
 
   if (lowConnector) {

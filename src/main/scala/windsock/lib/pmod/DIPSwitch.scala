@@ -25,10 +25,10 @@ case class DIPSwitchCtrl(msbFirst: Boolean = true) extends Component {
       io.pins.pin10
     )
 
-  val value = if (msbFirst) {
+   val value = if (msbFirst) {
     bits.asUInt
   } else {
-    bits.asUInt.flip
+    bits.reversed.asUInt
   }
 
   io.output := value

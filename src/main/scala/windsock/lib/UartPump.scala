@@ -5,9 +5,9 @@ import spinal.lib._
 import spinal.lib.com.uart._
 
 case class UartPump(
+    baudrate: HertzNumber,
     dataClock: ClockDomain = ClockDomain.current,
-    baudrate: HertzNumber = 3 MHz,
-    fifoSize: Int = 256,
+    fifoDepth: Int = 256,
     waterline: Int = 256 / 4
 ) extends Component {
   val io = new Bundle {
@@ -26,7 +26,7 @@ case class UartPump(
 
   val fifo = new StreamFifoCC(
     Bits(8 bits),
-    fifoSize,
+    fifoDepth,
     pushClock = clockDomain,
     popClock = dataClock
   )
@@ -37,7 +37,7 @@ case class UartPump(
     uartCtrl.io.write.payload := B(0)
     uartCtrl.io.write.valid := False
 
-    when(fifo.io.popOccupancy > fifoSize - waterline) {
+    when(fifo.io.popOccupancy > fifoDepth - waterline) {
       val xoff = B"8'x13"
       uartCtrl.io.write.payload := xoff
       uartCtrl.io.write.valid := True

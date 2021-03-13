@@ -3,7 +3,6 @@ pub const PERIPHERAL_MODULES: &[&str] = &[
     "gpioa",
     "uart1",
     "timer1",
-    "rgb",
 ];
 
 pub const INSTANCE_MODULES: &[&str] = &[
@@ -11,7 +10,6 @@ pub const INSTANCE_MODULES: &[&str] = &[
     "gpioa",
     "uart1",
     "timer1",
-    "rgb",
 ];
 
 pub const INSTANCE_NAMES: &[&str] = &[
@@ -19,5 +17,4 @@ pub const INSTANCE_NAMES: &[&str] = &[
     "GPIOA",
     "UART1",
     "TIMER1",
-    "RGB",
 ];

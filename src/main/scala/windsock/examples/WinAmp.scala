@@ -47,6 +47,5 @@ case class WinAmp() extends Component {
     snapOff.io.led3 := sample(7) & sample(3)
     snapOff.io.led4 := sample(7) & sample(2)
     snapOff.io.led5 := sample(7) & sample(1)
-
   }
 }
