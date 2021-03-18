@@ -18,15 +18,46 @@ import spinal.lib.system.debugger._
 
 import windsock.core.mmio.{Apb3SystemCtrl, Apb3TimerCtrl}
 import windsock.lib._
+import spinal.lib.memory.sdram.xdr.phy.Ecp5Sdrx2Phy
+import spinal.lib.memory.sdram.{SdramLayout, SdramGeneration}
+import spinal.lib.memory.sdram.xdr.SdramXdrIo
+
+object MT41K256M16 {
+  def layout =
+    SdramLayout(
+      generation = SdramGeneration.DDR3,
+      bankWidth = 3,
+      columnWidth = 10,
+      rowWidth = 15,
+      dataWidth = 16
+    )
+}
 
 class Core(config: CoreConfig) extends Component {
   val io = new Bundle {
+    val jtag = if (config.enableDebug) slave(Jtag()) else null
     val asyncReset = in(Bool())
+    val ddram = master(SdramXdrIo(MT41K256M16.layout))
+
     val gpio = master(TriStateArray(config.gpioWidth bits))
     val uart = master(Uart())
-    val jtag = if (config.enableDebug) slave(Jtag()) else null
     val panic = out(Bool())
   }
+
+  val pl = Ecp5Sdrx2Phy.phyLayout(MT41K256M16.layout)
+
+  io.ddram.ADDR := 0
+  io.ddram.BA := 0
+  io.ddram.CASn := False
+  io.ddram.CKE := False
+  io.ddram.CSn := False
+  io.ddram.DM := 0
+  io.ddram.RASn := False
+  io.ddram.WEn := False
+  io.ddram.CK := False
+  io.ddram.CKn := False
+  io.ddram.ODT := False
+  io.ddram.RESETn := False
 
   val resetCtrlClockDomain = ClockDomain(
     clock = clockDomain.readClockWire,

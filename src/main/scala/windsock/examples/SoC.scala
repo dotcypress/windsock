@@ -16,6 +16,8 @@ object SoC {
 case class SoC() extends Component {
   val coreConfig = CoreConfig.withRamFile("src/main/resources/ram.hex")
   val io = new Bundle {
+    val ddram = master(SdramXdrIo(MT41K256M16.layout))
+
     val leds = out(LedArray())
     val pmod7 = master(SnapOff())
     val uart = master(Uart())
@@ -24,6 +26,7 @@ case class SoC() extends Component {
   io.leds.powerOff()
 
   val core = new Core(coreConfig)
+  core.io.ddram <> io.ddram
   core.io.uart <> io.uart
 
   val snapOff = new SnapOffCtrl
