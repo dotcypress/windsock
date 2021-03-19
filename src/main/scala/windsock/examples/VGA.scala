@@ -7,15 +7,22 @@ import blackbox._
 import windsock.lib.LedArray
 import windsock.lib.pmod._
 import windsock.bsp._
+import spinal.lib.graphic.RgbConfig
+import spinal.lib.graphic.vga.VgaCtrl
+import spinal.lib.graphic.vga.Vga
 object VGA {
   def main(args: Array[String]) = ECPIX5.generate(new VGA)
 }
 
 case class VGA() extends Component {
+  val rgbConfig = RgbConfig(4, 4, 4)
   val io = new Bundle {
-    val pmod5 = master(DVI())
-    val pmod4 = master(DVI())
+    val hdmiReset = out(Bool())
+    val pixelClock = out(Bool())
+    val vga = master(Vga(rgbConfig))
   }
+
+  io.hdmiReset := True
 
   val pll = PLL(
     PLLConfig(
@@ -26,6 +33,7 @@ case class VGA() extends Component {
     )
   )
   pll.io.clockIn := ClockDomain.current.readClockWire
+  io.pixelClock := pll.io.primaryClockOut
 
   val animation = new SlowArea(10 Hz) {
     val offset = CounterFreeRun(16)
@@ -35,23 +43,41 @@ case class VGA() extends Component {
     pll.io.primaryClockOut,
     ClockDomain.current.readResetWire
   ) {
+
+    val ctrl = new VgaCtrl(rgbConfig)
+    ctrl.io.softReset := False
+    ctrl.io.timings.setAs_h640_v480_r60
+    ctrl.io.vga <> io.vga
+
+    val x = Counter(640)
+    val y = Counter(480)
+
+    when(ctrl.io.vga.colorEn) {
+      x.increment()
+    }
+
+    when(ctrl.io.vga.hSync.fall()) {
+      x.clear()
+      y.increment()
+    }
+
+    when(ctrl.io.vga.vSync.fall()) {
+      x.clear()
+      y.clear()
+    }
+
     val counter = Reg(UInt(4 bits))
 
-    val dvi = new DVICtrl
-    dvi.io.pinsA <> io.pmod5
-    dvi.io.pinsB <> io.pmod4
-    dvi.io.pixels.valid := True
-
-    val point = dvi.io.position.payload
     val off = U(0)
     val on = U(15)
 
-    dvi.io.pixels.r := (point.x > 40 & point.x < 50) ? on | off
-    dvi.io.pixels.g := (point.x > 120 & point.x < 150) ? on | off
-    dvi.io.pixels.b := (point.y > 80 & point.y < 100) ? on | off
+    ctrl.io.pixels.valid := True
+    ctrl.io.pixels.r := (x > 40 & x < 50) ? on | off
+    ctrl.io.pixels.g := (x > 120 & x < 150) ? on | off
+    ctrl.io.pixels.b := (y > 80 & y < 100) ? on | off
 
     counter := counter + 1
-    when(dvi.io.frameStart) {
+    when(ctrl.io.frameStart) {
       counter := 0
     }
   }
