@@ -2,9 +2,6 @@ package windsock.core
 
 import scala.collection.mutable.ArrayBuffer
 
-import vexriscv.plugin._
-import vexriscv._
-import vexriscv.ip.{DataCacheConfig, InstructionCacheConfig}
 import spinal.core._
 import spinal.lib._
 import spinal.lib.bus.amba3.apb._
@@ -16,16 +13,24 @@ import spinal.lib.io.TriStateArray
 import spinal.lib.misc.HexTools
 import spinal.lib.system.debugger._
 
+import vexriscv.plugin._
+import vexriscv._
+import vexriscv.ip.{DataCacheConfig, InstructionCacheConfig}
+
 import windsock.core.mmio.{Apb3SystemCtrl, Apb3TimerCtrl}
 import windsock.lib._
 
 class Core(config: CoreConfig) extends Component {
   val io = new Bundle {
     val asyncReset = in(Bool())
+
     val gpio = master(TriStateArray(config.gpioWidth bits))
     val uart = master(Uart())
-    val jtag = if (config.enableDebug) slave(Jtag()) else null
+
+    val leds = out(LedArray())
     val panic = out(Bool())
+
+    val jtag = if (config.enableDebug) slave(Jtag()) else null
   }
 
   val resetCtrlClockDomain = ClockDomain(
@@ -139,11 +144,11 @@ class Core(config: CoreConfig) extends Component {
       crossbar.readRsp << ctrl.readRsp
     })
 
-    axiCrossbar.addPipelining(core.dBus)((cpu, crossbar) => {
-      cpu.sharedCmd >> crossbar.sharedCmd
-      cpu.writeData >> crossbar.writeData
-      cpu.writeRsp << crossbar.writeRsp
-      cpu.readRsp <-< crossbar.readRsp
+    axiCrossbar.addPipelining(core.dBus)((crossbar, core) => {
+      crossbar.sharedCmd >> core.sharedCmd
+      crossbar.writeData >> core.writeData
+      crossbar.writeRsp << core.writeRsp
+      crossbar.readRsp <-< core.readRsp
     })
 
     axiCrossbar.build()
@@ -173,6 +178,7 @@ class Core(config: CoreConfig) extends Component {
     )
   }
 
+  io.leds <> axi.sysCtrl.io.leds
   io.gpio <> axi.gpioCtrl.io.gpio
   io.uart <> axi.uartCtrl.io.uart
 }

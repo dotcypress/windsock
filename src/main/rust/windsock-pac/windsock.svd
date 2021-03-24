@@ -29,16 +29,29 @@
       </addressBlock>
       <registers>
         <register>
-          <name>PANIC</name>
-          <description>Application panic flag</description>
+          <name>CONTROL</name>
+          <description>System reset and control register</description>
           <addressOffset>0x00</addressOffset>
           <resetValue>0x00</resetValue>
           <size>32</size>
-          <access>write-only</access>
+          <fields>
+            <field>
+              <name>PANIC</name>
+              <description>Application panic flag</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ENABLE_LEDS</name>
+              <description>Onboard leds controler enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
         </register>
         <register>
           <name>CLOCK</name>
-          <description>System clock frequency</description>
+          <description>System clock frequency in Hertz</description>
           <addressOffset>0x04</addressOffset>
           <resetValue>0x00</resetValue>
           <size>32</size>
@@ -51,6 +64,48 @@
           <resetValue>0x00</resetValue>
           <size>32</size>
           <access>read-only</access>
+        </register>
+        <register>
+          <name>LEDA</name>
+          <description>Leds colors register</description>
+          <addressOffset>0x0C</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+          <fields>
+            <field>
+              <name>COLOR0</name>
+              <description>Led1 color</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+            <field>
+              <name>COLOR1</name>
+              <description>Led2 color</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LEDB</name>
+          <description>Leds colors register</description>
+          <addressOffset>0x10</addressOffset>
+          <resetValue>0x00</resetValue>
+          <size>32</size>
+          <fields>
+            <field>
+              <name>COLOR2</name>
+              <description>Led2 color</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+            <field>
+              <name>COLOR3</name>
+              <description>Led3 color</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+          </fields>
         </register>
       </registers>
     </peripheral>

@@ -3,11 +3,11 @@ package windsock.examples
 import spinal.core._
 import spinal.lib._
 import spinal.lib.com.uart._
+
 import windsock.core._
 import windsock.lib.pmod._
 import windsock.lib.LedArray
 import windsock.bsp._
-import spinal.lib.memory.sdram.xdr.SdramXdrIo
 
 object SoC {
   def main(args: Array[String]) = ECPIX5.generate(new SoC)
@@ -16,22 +16,21 @@ object SoC {
 case class SoC() extends Component {
   val coreConfig = CoreConfig.withRamFile("src/main/resources/ram.hex")
   val io = new Bundle {
-    val leds = out(LedArray())
     val pmod7 = master(SnapOff())
     val uart = master(Uart())
+    val leds = out(LedArray())
   }
-
-  io.leds.powerOff()
 
   val core = new Core(coreConfig)
   core.io.uart <> io.uart
+  core.io.leds <> io.leds
 
   val snapOff = new SnapOffCtrl
   snapOff.io.pins <> io.pmod7
   core.io.asyncReset <> ~snapOff.io.button3
 
-  new SlowArea(1 Hz) {
-    snapOff.io.led1 := CounterFreeRun(2).willOverflow
+  new SlowArea(8 Hz) {
+    snapOff.io.led1 := core.io.panic && CounterFreeRun(2).willOverflow
   }
 
   val gpio = core.io.gpio

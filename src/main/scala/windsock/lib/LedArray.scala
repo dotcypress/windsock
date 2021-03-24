@@ -17,20 +17,28 @@ case class LedArray(size: Int = 4) extends Bundle {
   }
 }
 
-case class LedArrayCtrl(size: Int) extends Component {
+case class LedArrayCtrl(size: Int = 4) extends Component {
   val io = new Bundle {
-    val colors = slave(
-      Flow(Vec.fill(size)(Rgb(8, 8, 8)))
-    )
+    val colors = slave(Flow(Vec.fill(size)(Rgb(4, 4, 4))))
+    val enable = in(Bool)
+
     val leds = out(LedArray(size))
   }
 
+  val counter = Counter(8 bit, io.enable)
   val colors = io.colors.toReg()
-  val counter = CounterFreeRun(256)
 
-  Seq.tabulate(io.colors.payload.length)(idx => {
-    io.leds.leds(idx).r := RegNext(counter > colors(idx).r).asUInt
-    io.leds.leds(idx).g := RegNext(counter > colors(idx).g).asUInt
-    io.leds.leds(idx).b := RegNext(counter > colors(idx).b).asUInt
+  val disable = ~io.enable.asUInt
+  val leds = io.leds.leds
+
+  val gamma = Vec[UInt](
+    0, 3, 7, 10, 18, 28, 41, 56, 73, 92, 113, 137, 163, 192, 222, 255
+  )
+
+  Seq.tabulate(colors.length)(idx => {
+    val color = colors(idx)
+    leds(idx).r := disable | RegNext(counter >= gamma(color.r)).asUInt
+    leds(idx).g := disable | RegNext(counter >= gamma(color.g)).asUInt
+    leds(idx).b := disable | RegNext(counter >= gamma(color.b)).asUInt
   })
 }

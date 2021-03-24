@@ -139,7 +139,7 @@ macro_rules! uart {
 
     impl Serial<Instance> {
       pub fn $uartX(uart: Instance, config: Config) -> Self {
-        let clk = crate::Device::clk_frequency().0 as u64;
+        let clk = crate::System::clk_frequency().0 as u64;
         let div = (clk / config.baudrate.0 as u64 / 5) - 1;
         write_reg!(crate::$uartX, uart, DIV, div as u32);
         modify_reg!(crate::$uartX, uart, CFG,

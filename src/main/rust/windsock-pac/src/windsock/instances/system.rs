@@ -4,7 +4,7 @@
 
 pub use super::super::peripherals::system::Instance;
 pub use super::super::peripherals::system::{RegisterBlock, ResetValues};
-pub use super::super::peripherals::system::{PANIC, CLOCK, PERIOD};
+pub use super::super::peripherals::system::{CONTROL, CLOCK, PERIOD, LEDA, LEDB};
 
 
 /// Access functions for the SYSTEM peripheral instance
@@ -19,9 +19,11 @@ pub mod SYSTEM {
 
     /// Reset values for each field in SYSTEM
     pub const reset: ResetValues = ResetValues {
-        PANIC: 0x0,
+        CONTROL: 0x0,
         CLOCK: 0x0,
         PERIOD: 0x0,
+        LEDA: 0x0,
+        LEDB: 0x0,
     };
 
     #[allow(renamed_and_removed_lints)]

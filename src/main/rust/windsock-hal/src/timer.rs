@@ -76,7 +76,7 @@ macro_rules! timer {
       where
         T: Into<NanoSecond>,
       {
-        let cycles = period.into().0 / crate::Device::clk_period().0;
+        let cycles = period.into().0 / crate::System::clk_period().0;
         let psc = cycles / 0xffff;
         let limit = cycles / (psc + 1);
         write_reg!(crate::$tim, self.tim, PSC, psc);
