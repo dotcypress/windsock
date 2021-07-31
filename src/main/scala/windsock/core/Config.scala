@@ -33,7 +33,6 @@ object CoreConfig {
       onChipRamSize = 32 kB,
       gpioWidth = 32,
       plugins = ArrayBuffer(
-        new PcManagerSimplePlugin(0x00000000L, false),
         new IBusCachedPlugin(
           resetVector = 0x80000000L,
           prediction = NONE,
@@ -74,7 +73,7 @@ object CoreConfig {
             mimpid = null,
             mhartid = 0,
             mtvecInit = 0x80000020L,
-            misaExtensionsInit = 66,
+            misaExtensionsInit = 0x1104,// RV32IMC
             ecallGen = true,
             wfiGenAsWait = true,
             mscratchGen = false,
@@ -106,8 +105,7 @@ object CoreConfig {
           bypassWriteBack = true,
           bypassWriteBackBuffer = true
         ),
-        new BranchPlugin(earlyBranch = true),
-        new YamlPlugin("cpu0.yaml")
+        new BranchPlugin(earlyBranch = true)
       ),
       uartConfig = UartCtrlMemoryMappedConfig(
         uartCtrlConfig = UartCtrlGenerics(

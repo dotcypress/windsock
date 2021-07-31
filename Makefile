@@ -16,7 +16,7 @@ bitstream:
 app:
 	cd src/main/rust/windsock-app && \
 	cargo build --release && \
-	riscv32-unknown-elf-objcopy -O ihex -S target/riscv32imc-unknown-none-elf/release/windsock-app ../../resources/ram.hex
+	riscv64-unknown-elf-objcopy -O ihex -S target/riscv32imc-unknown-none-elf/release/windsock-app ../../resources/ram.hex
 
 prog:
 	ecpprog -S $(BUILD_DIR)/$(MODULE).bit
