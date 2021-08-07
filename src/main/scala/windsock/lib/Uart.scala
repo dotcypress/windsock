@@ -47,17 +47,23 @@ case class UartSink(
     val uart = master(Uart())
   }
 
-  val fifo = io.data.queue(fifoDepth)
+  val uartCtrl = new UartCtrl()
+  uartCtrl.io.uart <> io.uart
+  uartCtrl.io.config.setClockDivider(baudrate)
+  uartCtrl.io.config.frame.dataLength := 7
+  uartCtrl.io.config.frame.parity := UartParityType.NONE
+  uartCtrl.io.config.frame.stop := UartStopType.ONE
+  uartCtrl.io.writeBreak := False
 
-  val serial = new UartStream(baudrate, rxEnabled = false)
-  serial.io.uart <> io.uart
+  var fifo = new StreamFifo(Bits(dataWidth), fifoDepth)
+  fifo.io.push <> io.data
 
   if (dataWidth.value == 8) {
-    serial.io.tx <> fifo
+    fifo.io.pop <> uartCtrl.io.write
   } else {
     StreamWidthAdapter(
-      input = fifo,
-      output = serial.io.tx,
+      input = fifo.io.pop,
+      output = uartCtrl.io.write,
       endianness = endianness,
       padding = padding
     )

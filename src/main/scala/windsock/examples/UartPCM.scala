@@ -23,12 +23,11 @@ case class UartPCM() extends Component {
   amp.io.gain := False
 
   val pcm = Stream(Bits(8 bits))
-  val sample = pcm.toFlow.toReg()
-  amp.io.sample := U(sample)
+  amp.io.sample := U(pcm.toFlow.toReg())
 
   val pump = new UartPump(
     2 MHz,
-    clockDomain.newSlowedClockDomain(24 kHz)
+    clockDomain.newSlowedClockDomain(8 kHz)
   )
   pump.io.uart <> io.uart
   pump.io.data <> pcm

@@ -1,4 +1,4 @@
-MODULE = SoC
+MODULE = MicLedAnimation
 BUILD_DIR = target/bitstream
 CONSTRAINTS = src/main/scala/windsock/bsp/ecpix5.lpf
 

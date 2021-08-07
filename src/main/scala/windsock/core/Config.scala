@@ -96,7 +96,7 @@ object CoreConfig {
           separatedAddSub = false,
           executeInsertion = true
         ),
-        new LightShifterPlugin,
+        new FullBarrelShifterPlugin,
         new MulPlugin,
         new DivPlugin,
         new HazardSimplePlugin(

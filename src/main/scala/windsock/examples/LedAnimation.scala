@@ -27,9 +27,9 @@ case class LedAnimation() extends Component {
     leds.io.colors.valid := True
     Seq.tabulate(leds.io.colors.payload.length)(idx => {
       val color = leds.io.colors.payload(idx)
-      color.r := 0
+      color.r := (U(idx) - counter.value).resized
       color.g := 0
-      color.b := (U(idx) - counter.value).resized
+      color.b := (255 - U(idx) - counter.value).resized
     })
   }
 }
