@@ -1,4 +1,4 @@
-MODULE = MicLedAnimation
+MODULE = UartPCM
 BUILD_DIR = target/bitstream
 CONSTRAINTS = src/main/scala/windsock/bsp/ecpix5.lpf
 
