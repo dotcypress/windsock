@@ -33,7 +33,7 @@ COMMANDS:\r\n\
 \thelp      Print this message\r\n
 ";
 
-struct Context {
+struct Env {
     led_on: bool,
     sys: System,
     shell: UShell<
@@ -44,12 +44,12 @@ struct Context {
     >,
 }
 
-static mut CTX: Option<Context> = None;
+static mut ENV: Option<Env> = None;
 
 #[entry]
 fn main() -> ! {
     let gpioa = GPIOA::take().unwrap().split();
-    let uart = UART1::take().unwrap().serial(serial::Config::default());
+
     let mut sys = SYSTEM::take().unwrap().system();
     sys.enable_leds();
 
@@ -69,12 +69,15 @@ fn main() -> ! {
 
     let autocomplete = StaticAutocomplete(["clear", "help", "status"]);
     let history = LRUHistory::default();
+
+    let mut uart = UART1::take().unwrap().serial(serial::Config::default());
+    uart.rx().listen();
+
     let mut shell = UShell::new(uart, autocomplete, history);
     write!(shell, "Welcome to WindSock{}{}", CR, SHELL_PROMPT).ok();
-    shell.serial().rx().listen();
 
     interrupt::free(|_| unsafe {
-        CTX.replace(Context {
+        ENV.replace(Env {
             shell,
             sys,
             led_on: false,
@@ -104,44 +107,44 @@ fn main() -> ! {
 #[export_name = "MachineExternal"]
 fn uart_interrupt() {
     interrupt::free(|_| unsafe {
-        CTX.as_mut().map(poll_serial);
+        ENV.as_mut().map(poll_serial);
     });
 }
 
-fn poll_serial(ctx: &mut Context) {
+fn poll_serial(env: &mut Env) {
     loop {
-        match ctx.shell.poll() {
+        match env.shell.poll() {
             Err(ShellError::WouldBlock) => break,
             Ok(Some(Input::Command((cmd, _)))) => {
                 match cmd {
                     "help" => {
-                        ctx.shell.write_str(HELP).ok();
+                        env.shell.write_str(HELP).ok();
                     }
                     "clear" => {
-                        ctx.shell.clear().ok();
+                        env.shell.clear().ok();
                     }
                     "on" => {
-                        ctx.sys.set_led_color(0, RgbColor::from_hex(0xFFA500));
-                        ctx.led_on = true;
-                        ctx.shell.write_str(CR).ok();
+                        env.sys.set_led_color(0, RgbColor::from_hex(0xFFA500));
+                        env.led_on = true;
+                        env.shell.write_str(CR).ok();
                     }
                     "off" => {
-                        ctx.sys.set_led_color(0, RgbColor::from_hex(0));
-                        ctx.led_on = false;
-                        ctx.shell.write_str(CR).ok();
+                        env.sys.set_led_color(0, RgbColor::from_hex(0));
+                        env.led_on = false;
+                        env.shell.write_str(CR).ok();
                     }
                     "status" => {
-                        let status = if ctx.led_on { "On" } else { "Off" };
-                        write!(ctx.shell, "{0:}Led status: {1:}{0:}", CR, status,).ok();
+                        let status = if env.led_on { "On" } else { "Off" };
+                        write!(env.shell, "{0:}Led status: {1:}{0:}", CR, status,).ok();
                     }
                     "" => {
-                        ctx.shell.write_str(CR).ok();
+                        env.shell.write_str(CR).ok();
                     }
                     _ => {
-                        write!(ctx.shell, "{0:}unsupported command{0:}", CR).ok();
+                        write!(env.shell, "{0:}unsupported command{0:}", CR).ok();
                     }
                 }
-                ctx.shell.write_str(SHELL_PROMPT).ok();
+                env.shell.write_str(SHELL_PROMPT).ok();
             }
             _ => {}
         }

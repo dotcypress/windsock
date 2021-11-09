@@ -13,7 +13,7 @@ bench = false
 [dependencies]
 panic-halt = "0.2.0"
 windsock-hal = { path = "../windsock-hal/"}
-ushell = "0.3.3"
+ushell = "0.3.5"
 
 [profile.release]
 codegen-units = 1
